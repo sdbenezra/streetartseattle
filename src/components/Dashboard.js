@@ -11,6 +11,7 @@ class Dashboard extends Component {
       message: "",
       showStatus: false,
       works: [],
+      index: false,
     }
   }
 
@@ -32,9 +33,23 @@ class Dashboard extends Component {
 
 
   render() {
-    return (
-      <WorkList works={this.state.works}/>
-    );
+    if (this.state.index){
+      return (
+        <div className="crossfade">
+          <figure></figure>
+          <figure></figure>
+          <figure></figure>
+          <figure></figure>
+          <figure></figure>
+        </div>
+      )
+    }
+    else {
+      return (
+        <WorkList works={this.state.works}/>
+      );
+    }
+
   }
 }
 
