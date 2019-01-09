@@ -1,0 +1,10 @@
+.item {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  padding: 0 1.5em;
+}
+
+.item__details {
+  padding: 1.5em;
+  border-top: 2px solid #595959;
+}
