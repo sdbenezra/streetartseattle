@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import WorkList from './WorkList';
+import Home from './Home';
+import './Dashboard.css'
 
 
 class Dashboard extends Component {
@@ -33,29 +36,38 @@ class Dashboard extends Component {
 
 
   render() {
-    if (this.state.index){
-      return (
-        <div className="crossfade">
-          <figure></figure>
-          <figure></figure>
-          <figure></figure>
-          <figure></figure>
-          <figure></figure>
-        </div>
-      )
-    }
-    else {
-      return (
-        <WorkList works={this.state.works}/>
-      );
-    }
+    return(
+      <Router>
+        <div>
+          <nav className="nav-list_container">
+            <button className="button">
+              <Link className="link" to="/" >Home</Link>
+            </button>
+            <button className="button">
+              <Link className="link" to="/map/" >Map</Link>
+            </button>
+            <button className="button">
+              <Link className="link" to="/listings/" >Listings</Link>
+            </button>
+            <button className="button">
+              <Link className="link" to="/search/" >Search</Link>
+            </button>
+          </nav>
 
+          <div className={this.state.showStatus ? "status-bar status-bar--success" : "status-bar--hide"}>
+            <p className={"status-bar__text"}>{this.state.message}</p>
+          </div>
+
+          <Route path="/" exact component={Home}/>
+          <Route path="/map/"
+            render={() => <p>Map</p>}/>
+          <Route path="/listings/"
+            render={() => <WorkList works={this.state.works}/>} />
+          <Route path="/search/" render={() => <p>Search</p>} />
+        </div>
+      </Router>
+    );
   }
 }
-
-
-
-
-
 
 export default Dashboard;
