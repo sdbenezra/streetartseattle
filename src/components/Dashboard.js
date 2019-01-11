@@ -11,14 +11,14 @@ class Dashboard extends Component {
     super();
 
     this.state = {
-      message: "",
-      showStatus: false,
+      message: "Status",
+      showStatus: true,
       works: [],
       index: false,
     }
   }
 
-  componentDidMount() {
+  refreshList = () => {
     const GET_ALL_WORKS_URL = "http://127.0.0.1:8000/api/work/works/";
     axios.get(GET_ALL_WORKS_URL)
     .then((response) => {
@@ -34,6 +34,9 @@ class Dashboard extends Component {
     });
   }
 
+  componentDidMount() {
+    this.refreshList();
+  }
 
   render() {
     return(
@@ -47,16 +50,15 @@ class Dashboard extends Component {
               <Link className="link" to="/map/" >Map</Link>
             </button>
             <button className="button">
-              <Link className="link" to="/listings/" >Listings</Link>
+              <Link className="link" to="/listings/" onClick={this.refreshList} >Listings</Link>
             </button>
             <button className="button">
               <Link className="link" to="/search/" >Search</Link>
             </button>
+            <div className={this.state.showStatus ? "status-bar" : "status-bar--hide"}>
+                <p className="status-bar__text">{this.state.message}</p>
+              </div>
           </nav>
-
-          <div className={this.state.showStatus ? "status-bar status-bar--success" : "status-bar--hide"}>
-            <p className={"status-bar__text"}>{this.state.message}</p>
-          </div>
 
           <Route path="/" exact component={Home}/>
           <Route path="/map/"

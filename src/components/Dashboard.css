@@ -30,3 +30,19 @@
   color: white;
   font-weight: bold;
 }
+
+.status-bar {
+  display: inline;
+  margin-left: 50%;
+}
+
+.status-bar--hide {
+  display: none;
+}
+
+.status-bar__text {
+  display: inline;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+}

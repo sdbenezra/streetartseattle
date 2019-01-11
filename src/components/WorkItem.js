@@ -9,7 +9,7 @@ function WorkImage(props) {
     return <img src={image} alt=''width={250} height={150} mode='fit'/>
   }
   else {
-    return <img src={foxmural} alt=''width={250} height={150} mode='fit'/>
+    return <img src={'https://picsum.photos/250/150/?image=1025'} alt=''width={250} height={150} mode='fit'/>
   }
 }
 
