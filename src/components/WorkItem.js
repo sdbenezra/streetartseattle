@@ -1,10 +1,8 @@
 import React from 'react';
 import './WorkItem.css';
-import foxmural from '../images/foxmural.jpg';
 
 function WorkImage(props) {
   const image = props.image;
-  console.log(props.image);
   if (image) {
     return <img src={image} alt=''width={250} height={150} mode='fit'/>
   }

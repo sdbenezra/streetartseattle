@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import WorkList from './WorkList';
 import Home from './Home';
-import './Dashboard.css'
+import './Dashboard.css';
+import SearchForm from './SearchForm';
+import { Redirect } from 'react-router';
 
 
 class Dashboard extends Component {
@@ -12,15 +14,16 @@ class Dashboard extends Component {
 
     this.state = {
       message: "Status",
-      showStatus: true,
+      showStatus: false,
       works: [],
       index: false,
     }
   }
 
+  GET_ALL_WORKS_URL = "http://127.0.0.1:8000/api/work/works/";
+
   refreshList = () => {
-    const GET_ALL_WORKS_URL = "http://127.0.0.1:8000/api/work/works/";
-    axios.get(GET_ALL_WORKS_URL)
+    axios.get(this.GET_ALL_WORKS_URL)
     .then((response) => {
       this.setState({
         works: response.data,
@@ -38,6 +41,24 @@ class Dashboard extends Component {
     this.refreshList();
   }
 
+  searchFilter = (queryString) => {
+    const url = `${this.GET_ALL_WORKS_URL}?search=${queryString.query}`
+    axios.get(url)
+    .then((response) => {
+      this.setState({
+        works: response.data,
+        filter: true,
+      });
+    console.log(this.state);
+    })
+    .catch((error) => {
+      this.setState({
+        error: error,
+      });
+    });
+    console.log(this.state.works);
+  };
+
   render() {
     return(
       <Router>
@@ -52,20 +73,24 @@ class Dashboard extends Component {
             <button className="button">
               <Link className="link" to="/listings/" onClick={this.refreshList} >Listings</Link>
             </button>
-            <button className="button">
-              <Link className="link" to="/search/" >Search</Link>
-            </button>
-            <div className={this.state.showStatus ? "status-bar" : "status-bar--hide"}>
-                <p className="status-bar__text">{this.state.message}</p>
-              </div>
+            <SearchForm searchCallback={this.searchFilter}/>
           </nav>
+          <div className={this.state.showStatus ? "status-bar" : "status-bar--hide"}>
+              <p className="status-bar__text">{this.state.message}</p>
+          </div>
 
-          <Route path="/" exact component={Home}/>
+          <Route exact path="/" render={() => (
+              this.state.filter === true ? (
+                this.setState({ filter: false, }),
+                <Redirect to="/listings"/>
+              ) : (
+                <Home />
+              )
+          )}/>
           <Route path="/map/"
             render={() => <p>Map</p>}/>
           <Route path="/listings/"
             render={() => <WorkList works={this.state.works}/>} />
-          <Route path="/search/" render={() => <p>Search</p>} />
         </div>
       </Router>
     );

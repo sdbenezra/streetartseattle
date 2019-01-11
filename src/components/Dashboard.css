@@ -3,6 +3,7 @@
   text-align: left;
   height: 5vh;
   padding-left: 3rem;
+  align-content:
 }
 
 .button {
@@ -33,7 +34,6 @@
 
 .status-bar {
   display: inline;
-  margin-left: 50%;
 }
 
 .status-bar--hide {
@@ -45,4 +45,8 @@
   color: white;
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+.search-form {
+  display: inline-block;
 }
