@@ -73,7 +73,7 @@ class Dashboard extends Component {
             <button className="button">
               <Link className="link" to="/listings/" onClick={this.refreshList} >Listings</Link>
             </button>
-            <SearchForm url={this.GET_ALL_WORKS_URL} filter={this.filterList}/>
+            <SearchForm className="search-form" url={this.GET_ALL_WORKS_URL} filter={this.filterList}/>
           </nav>
 
           <div className={this.state.showStatus ? "status-bar" : "status-bar--hide"}>

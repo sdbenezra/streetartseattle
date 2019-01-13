@@ -2,7 +2,8 @@
   background-color: #F7710A;
   text-align: left;
   padding-left: 3rem;
-  align-content:
+  display: inline-flex;
+  width: 100%;
 }
 
 .button {
@@ -47,5 +48,5 @@
 }
 
 .search-form {
-  display: inline-block;
+  display: inline;
 }
