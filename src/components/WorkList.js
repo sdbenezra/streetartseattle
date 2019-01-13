@@ -4,10 +4,8 @@ import './WorkList.css';
 
 
 const WorkList = (props) => {
+
   const list = props.works.map((work, i) => {
-    if (props.filter){
-      props.toggleFilter();
-    }
     return (
       <WorkItem
         key={i}
@@ -22,5 +20,7 @@ const WorkList = (props) => {
     </div>
   );
 }
+
+
 
 export default WorkList;

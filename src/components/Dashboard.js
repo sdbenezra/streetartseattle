@@ -30,7 +30,6 @@ class Dashboard extends Component {
       this.setState({
         works: response.data,
       });
-      console.log(this.state.works);
     })
     .catch((error) => {
       this.setState({
@@ -43,18 +42,21 @@ class Dashboard extends Component {
     this.refreshList();
   }
 
+  componentDidUpdate(){
+    this.toggleFilter();
+  }
+
   filterList = (newWorkList) => {
     let newState = this.state;
     newState.works = newWorkList;
     newState.filter = true;
     this.setState(newState);
-    console.log(this.state);
   }
 
   toggleFilter = () => {
-    let newState = this.state;
-    newState.filter = false;
-    this.setState(newState);
+    if (this.state.filter) {
+      this.setState({filter: false});
+    }
   }
 
   render() {
@@ -73,6 +75,7 @@ class Dashboard extends Component {
             </button>
             <SearchForm url={this.GET_ALL_WORKS_URL} filter={this.filterList}/>
           </nav>
+
           <div className={this.state.showStatus ? "status-bar" : "status-bar--hide"}>
               <p className="status-bar__text">{this.state.message}</p>
           </div>
@@ -91,6 +94,7 @@ class Dashboard extends Component {
                 ) : (
                   <h2>Map</h2>
                 ))}/>
+
           <Route path="/listings/"
             render={() => <WorkList works={this.state.works} toggleFilter={this.toggleFilter}
                 filter={this.state.filter}/>} />

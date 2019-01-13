@@ -8,7 +8,6 @@ class SearchForm extends Component {
 
     this.state = {
       query: '',
-      works: [],
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -25,21 +24,15 @@ class SearchForm extends Component {
     console.log("Search form submitted");
     let query = this.state.query
     const url = `${this.props.url}?search=${query}`
-    console.log(url);
     axios.get(url)
     .then((response) => {
-      console.log(this.state);
-      console.log(`Response data is ${response.data[0].title}`);
-      this.setState({ works: response.data })
-      console.log(this.state);
-      this.props.filter(this.state.works);
+      this.props.filter(response.data);
     })
     .catch((error) => {
       this.setState({
         error: error,
       });
     });
-    console.log(this.state.works);
   };
 
   render() {
