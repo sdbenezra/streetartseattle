@@ -10,6 +10,8 @@ const WorkList = (props) => {
       <WorkItem
         key={i}
         {...work}
+        showDetail={props.showDetail}
+        hideDetail={props.hideDetail}
       />
     );
   });

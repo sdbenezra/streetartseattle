@@ -1,56 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './WorkItem.css';
+import './WorkDetail.css';
 
-class WorkDetail extends React.Component {
+class WorkDetail extends React.Component{
+
+  WorkImage = (props) => {
+    if (this.props.workDetail.image) {
+      return <img src={this.props.workDetail.image} alt=''width={250} height={150} mode='fit'/>
+    }
+    else {
+      return <p>No Image Available</p>
+    }
+  }
+
   render() {
-    if(!this.props.show) {
+    if(!this.props.showDetail){
       return null;
     }
+    const {image, title, artist, category, about, media, measurements, date, address} = this.props.workDetail;
 
-    const backdropStyle = {
-      position: 'fixed',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: 'rgba(0,0,0,0.3)',
-      padding: 50
-    };
-
-    // The modal "window"
-    const modalStyle = {
-      backgroundColor: '#fff',
-      borderRadius: 5,
-      maxWidth: 500,
-      minHeight: 300,
-      margin: '0 auto',
-      padding: 30
-    };
-
-    return(
-      <div className='backdrop' style={{backdropStyle}}>
-        <div className='modal' style={{modalStyle}}>
-          <img src={this.props.image} alt=''/>
-          <h2>{this.props.image}</h2>
-          <p>by {this.props.artist}</p>
-          <p>{this.props.category}</p>
-          <p>{this.props.location}</p>
-          <p>{this.props.about}</p>
-          <div className="footer">
-            <button onClick={this.props.OnClose}>
-            Close
-            </button>
-          </div>
+    return (
+      <div>
+        <div className="modal">
+          <section className="modal-main">
+            <this.WorkImage image={image}/>
+            <h2>{title}</h2>
+            <p>by {artist}</p>
+            <p>{category}</p>
+            <p>{address}</p>
+            <p><strong>About:</strong> {about}</p>
+            <p><strong>Media:</strong> {media}</p>
+            <p><strong>Measurements:</strong> {measurements}</p>
+            <p>{date}</p>
+            <button onClick={this.props.handleClose}>close</button>
+          </section>
         </div>
       </div>
     );
   }
-}
+};
 
 WorkDetail.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  show: PropTypes.bool,
+  handleClose: PropTypes.func.isRequired,
+  showDetail: PropTypes.bool,
 }
 
 

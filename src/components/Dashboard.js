@@ -8,7 +8,6 @@ import SearchForm from './SearchForm';
 import { Redirect } from 'react-router';
 
 
-
 class Dashboard extends Component {
   constructor() {
     super();
@@ -97,7 +96,9 @@ class Dashboard extends Component {
 
           <Route path="/listings/"
             render={() => <WorkList works={this.state.works} toggleFilter={this.toggleFilter}
-                filter={this.state.filter}/>} />
+                filter={this.state.filter}
+                showDetail={this.showWorkDetail}
+                hideDetail={this.hideWorkDetail}/>} />
         </div>
       </Router>
     );

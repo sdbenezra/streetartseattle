@@ -1,32 +1,54 @@
 import React from 'react';
 import './WorkItem.css';
+import WorkDetail from './WorkDetail';
 
-function WorkImage(props) {
-  const image = props.image;
-  if (image) {
-    return <img src={image} alt=''width={250} height={150} mode='fit'/>
+
+class WorkItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showDetail: false,
+    }
   }
-  else {
-    return <img src={'https://picsum.photos/250/150/?image=1025'} alt=''width={250} height={150} mode='fit'/>
+
+  showWorkDetail = () => {
+      this.setState({ showDetail: true });
+    }
+
+  hideWorkDetail = () => {
+      this.setState({ showDetail: false });
+    }
+
+  WorkImage = (props) => {
+    const image = props.image;
+    if (image) {
+      return <img src={image} alt=''width={250} height={150} mode='fit'/>
+    }
+    else {
+      return <img src={'https://picsum.photos/250/150/?image=1025'} alt=''width={250} height={150} mode='fit'/>
+    }
   }
-}
 
-const WorkItem = (props) => {
-  const {title, artist, category, location} = props
-
-  return(
-    <div className='item'>
-      <div className='item__details'>
-        <WorkImage image={props.image}/>
+  render() {
+    return(
+      <div>
+        <div className='item' onClick={this.showWorkDetail}>
+          <div className='item__details'>
+            <this.WorkImage image={this.props.image}/>
+          </div>
+          <div className='item__details'>
+            <h2>{this.props.title}</h2>
+            <p>by {this.props.artist}</p>
+            <p>{this.props.category}</p>
+            <p>{this.props.location}</p>
+          </div>
+        </div>
+        <WorkDetail show={this.showWorkDetail} handleClose={this.hideWorkDetail} workDetail={this.props}
+            showDetail={this.state.showDetail}/>
       </div>
-      <div className='item__details'>
-        <h2>{title}</h2>
-        <p>by {artist}</p>
-        <p>{category}</p>
-        <p>{location}</p>
-      </div>
-    </div>
-  )
+    );
+  };
 }
 
 
