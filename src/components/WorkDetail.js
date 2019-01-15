@@ -41,7 +41,7 @@ class WorkDetail extends React.Component{
     let value = event.target.value
     let formData = {...this.state.formData}
     if (name === "category"){
-      value = [event.target.value] || null;
+      value = [event.target.value];
     }
 
     formData[name] = value;
@@ -106,7 +106,17 @@ class WorkDetail extends React.Component{
   render() {
     if(!this.props.showDetail){
       return null;
-    }
+    };
+
+    console.log(`Hello ${this.props.categories}`);
+    console.log(this.props.categories.length);
+
+    const list = this.props.categories.map((cat, i) => {
+        return (
+          <option key={i} value={this.props.categories[i].name}>{this.props.categories[i].name}</option>
+          )
+      });
+
     const {image, title, artist, category, about, media, measurements, date, address, tags} = this.props.workDetail;
 
     return (
@@ -148,7 +158,7 @@ class WorkDetail extends React.Component{
                 <label className="label">
                   <h2>Update Information Here:</h2>
                   <strong>Title: </strong>
-                  <input name="title" placeholder={`${title}`} type="text" className="value"
+                  <input name="title" placeholder="Title" type="text" className="value"
                    value={this.state.formData.title} onChange={this.onInputChange}/>
                 </label>
                 <label className="label">
@@ -158,8 +168,9 @@ class WorkDetail extends React.Component{
                 </label>
                 <label className="label">
                   <strong>Category: </strong>
-                  <input name="category" placeholder="Category" type="text"  className="value"
-                  value={this.state.formData.category} onChange={this.onInputChange} />
+                  <select name="category" value={`${this.state.formData.category}`} onChange={this.handleChange} multiple={false} >
+                    {list}
+                  </select>
                 </label>
                 <label className="label">
                   <strong>Adresss/Location: </strong>
