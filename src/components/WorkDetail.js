@@ -124,8 +124,8 @@ class WorkDetail extends React.Component{
             <p>{date}</p>
             <p><strong>Tags: </strong> {tags}</p>
             <div>
-              <p><button onClick={this.props.handleClose} className="label">close</button></p>
-              <p><button className={this.state.showEdit ? "display-none" : "display-block label"} onClick={this.showForm}>edit</button></p>
+              <p><button className="label" onClick={this.showForm}>edit</button><span></span>
+              <button onClick={this.props.handleClose} className="label">close</button></p>
             </div>
           </section>
         </div>
