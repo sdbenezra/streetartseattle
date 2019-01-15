@@ -45,7 +45,8 @@ class WorkItem extends React.Component {
           </div>
         </div>
         <WorkDetail show={this.showWorkDetail} handleClose={this.hideWorkDetail} workDetail={this.props}
-            showDetail={this.state.showDetail}/>
+            showDetail={this.state.showDetail}
+            url={this.props.url}/>
       </div>
     );
   };

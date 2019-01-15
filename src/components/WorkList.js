@@ -12,6 +12,7 @@ const WorkList = (props) => {
         {...work}
         showDetail={props.showDetail}
         hideDetail={props.hideDetail}
+        url={props.url}
       />
     );
   });
