@@ -45,3 +45,23 @@
   font-size: 1.2rem;
   font-weight: bold;
 }
+
+.small-button {
+  background-color: #F7710A;
+  border: none;
+  color: white;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.small-button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}

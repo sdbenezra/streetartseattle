@@ -124,8 +124,8 @@ class WorkDetail extends React.Component{
             <p>{date}</p>
             <p><strong>Tags: </strong> {tags}</p>
             <div>
-              <p><button className="label" onClick={this.showForm}>edit</button><span></span>
-              <button onClick={this.props.handleClose} className="label">close</button></p>
+              <p><button className="label small-button" onClick={this.showForm}>edit</button><span></span>
+              <button onClick={this.props.handleClose} className="label small-button">close</button></p>
             </div>
           </section>
         </div>
@@ -139,8 +139,8 @@ class WorkDetail extends React.Component{
                 <input name="image" type="file" accept="image/*" className="value" ref={this.fileInput} />
               </label>
               <div className="label">
-                <input type="submit" value="Submit" className="label" />
-                <button onClick={this.hideForm} className="label">Exit</button>
+                <input type="submit" value="Submit" className="label small-button" />
+                <button onClick={this.hideForm} className="label small-button">Exit</button>
               </div>
             </form>
             <form onSubmit={this.saveEdits}>
@@ -192,8 +192,8 @@ class WorkDetail extends React.Component{
                          className="value" value={this.state.formData.tags} onChange={this.onInputChange} />
                 </label>
                 <div className="label">
-                  <input type="submit" value="Submit edit" className="label button" />
-                  <button onClick={this.hideForm} className="label">Exit without saving</button>
+                  <input type="submit" value="Submit edit" className="label small-button" />
+                  <button onClick={this.hideForm} className="label small-button">Exit without saving</button>
                 </div>
               </div>
             </form>
