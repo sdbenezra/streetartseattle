@@ -47,5 +47,9 @@ class SearchForm extends Component {
   }
 }
 
+SearchForm.propTypes = {
+  filter: PropTypes.func.isRequired,
+  url: PropTypes.string.isRequired,
+}
 
 export default SearchForm;

@@ -30,4 +30,23 @@
 .edit-form {
   display: grid;
   grid-row-gap: 1rem;
+  font-size: 1.2rem;
+}
+
+.picture-upload {
+  margin: 2rem;
+  padding: 5px;
+  border: solid blue 2px;
+}
+
+.label {
+  padding: 5px;
+}
+
+.detail {
+  font-size: 1.2rem;
+}
+
+.button {
+  
 }

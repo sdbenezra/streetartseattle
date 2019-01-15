@@ -1,9 +1,8 @@
 .nav-list_container {
   background-color: #F7710A;
-  text-align: left;
+  text-align: center;
   padding-left: 3rem;
-  display: inline-flex;
-  width: 100%;
+  width: 95vw;
 }
 
 .button {
@@ -45,8 +44,4 @@
   color: white;
   font-size: 1.2rem;
   font-weight: bold;
-}
-
-.search-form {
-  display: inline;
 }

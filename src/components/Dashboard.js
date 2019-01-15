@@ -98,7 +98,8 @@ class Dashboard extends Component {
             render={() => <WorkList works={this.state.works} toggleFilter={this.toggleFilter}
                 filter={this.state.filter}
                 showDetail={this.showWorkDetail}
-                hideDetail={this.hideWorkDetail}/>} />
+                hideDetail={this.hideWorkDetail}
+                url={this.GET_ALL_WORKS_URL}/>} />
         </div>
       </Router>
     );
