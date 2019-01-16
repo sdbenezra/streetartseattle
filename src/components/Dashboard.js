@@ -111,7 +111,7 @@ class Dashboard extends Component {
                 <Link className="link" to="/map/" >Map</Link>
               </button>
               <button className="button">
-                <Link className="link" to="/listings/" onClick={this.refreshList} >Listings</Link>
+                <Link className="link" to="/listings/" onClick={this.refreshList}>Listings</Link>
               </button>
               <button className="link small-button" onClick={this.openModalHandler} categories={this.state.categories}
                   url={this.GET_ALL_WORKS_URL}
@@ -148,8 +148,8 @@ class Dashboard extends Component {
         <div className={this.state.isShowing? "display-block" : "display-none"}>
           <section className="modal">
             <div className="modal-main">
-              <button onClick={this.closeModalHandler} className="label small-button">Exit without saving</button>
-              <New categories={this.state.categories}/>
+              <button onClick={this.closeModalHandler} className="label small-button">Exit</button>
+              <New categories={this.state.categories} url={this.GET_ALL_WORKS_URL} close={this.closeModalHandler}/>
             </div>
           </section>
         </div>

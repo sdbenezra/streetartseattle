@@ -45,12 +45,18 @@ class New extends React.Component{
     console.log(URL);
     let image = this.fileInput.current.files[0]
     let formData = new FormData();
-    formData.append('title', this.state.formData.title);
+    for (const key in this.state.formData){
+      formData.append(key, this.state.formData[key])
+    };
     formData.append('image', image);
-    axios.post(URL,
-      formData,
-    ).then((response) => {
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/work/works/',
+      data: formData,
+      config: { headers: {'Content-Type': 'multipart/form-data'}}
+    }).then((response) => {
       console.log('Uploaded New Work');
+      this.props.close();
     })
     .catch((error) => {
       console.log('upload failed');

@@ -42,7 +42,7 @@ class WorkList extends React.Component {
           showDetail={this.props.showDetail}
           hideDetail={this.props.hideDetail}
           url={this.props.url}
-          categories = {this.state.categories}
+          categories={this.state.categories}
         />
       );
     });
