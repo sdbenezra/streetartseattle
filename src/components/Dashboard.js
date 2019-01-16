@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import WorkList from './WorkList';
 import Home from './Home';
+import New from './New';
 import './Dashboard.css';
 import SearchForm from './SearchForm';
 import { Redirect } from 'react-router';
@@ -17,11 +18,14 @@ class Dashboard extends Component {
       showStatus: false,
       works: [],
       filter: false,
+      categories: [],
+      isShowing: false,
     }
     this.filterList = this.filterList.bind(this);
   }
 
   GET_ALL_WORKS_URL = "http://127.0.0.1:8000/api/work/works/";
+  GET_CATEGORIES_URL = "http://127.0.0.1:8000/api/work/categories/"
 
   refreshList = () => {
     axios.get(this.GET_ALL_WORKS_URL)
@@ -37,8 +41,32 @@ class Dashboard extends Component {
     });
   }
 
+  retrieveCategories = () => {
+    axios.get(this.GET_CATEGORIES_URL)
+    .then((response) => {
+      let list = []
+      console.log(`response ${response.data[0].id} ${response.data.length}`);
+      let i;
+      for(i = 0; i < response.data.length; i += 1){
+        console.log(response.data[i]);
+        list.push(response.data[i]);
+      }
+      this.setState({
+        categories: list,
+      });
+      console.log(this.state.categories);
+    })
+    .catch((error) => {
+      this.setState({
+        error: error.message
+      });
+    });
+  }
+
+
   componentDidMount() {
     this.refreshList();
+    this.retrieveCategories();
   }
 
   componentDidUpdate(){
@@ -58,50 +86,76 @@ class Dashboard extends Component {
     }
   }
 
+  openModalHandler = () => {
+        this.setState({
+            isShowing: true
+        });
+    }
+
+    closeModalHandler = () => {
+        this.setState({
+            isShowing: false
+        });
+    }
+
   render() {
     return(
-      <Router>
-        <div>
-          <nav className="nav-list_container">
-            <button className="button">
-              <Link className="link" to="/" >Home</Link>
-            </button>
-            <button className="button">
-              <Link className="link" to="/map/" >Map</Link>
-            </button>
-            <button className="button">
-              <Link className="link" to="/listings/" onClick={this.refreshList} >Listings</Link>
-            </button>
-            <SearchForm className="search-form" url={this.GET_ALL_WORKS_URL} filter={this.filterList}/>
-          </nav>
+      <div>
+        <Router>
+          <div>
+            <nav className="nav-list_container">
+              <button className="button">
+                <Link className="link" to="/" >Home</Link>
+              </button>
+              <button className="button">
+                <Link className="link" to="/map/" >Map</Link>
+              </button>
+              <button className="button">
+                <Link className="link" to="/listings/" onClick={this.refreshList} >Listings</Link>
+              </button>
+              <button className="link small-button" onClick={this.openModalHandler} categories={this.state.categories}
+                  url={this.GET_ALL_WORKS_URL}
+                   >Add New Work
+              </button>
+              <SearchForm className="search-form" url={this.GET_ALL_WORKS_URL} filter={this.filterList}/>
+            </nav>
 
-          <div className={this.state.showStatus ? "status-bar" : "status-bar--hide"}>
-              <p className="status-bar__text">{this.state.message}</p>
-          </div>
+            <div className={this.state.showStatus ? "status-bar" : "status-bar--hide"}>
+                <p className="status-bar__text">{this.state.message}</p>
+            </div>
 
-          <Route exact path="/" render={() => (
-              this.state.filter ? (
-                <Redirect to="/listings/" />
-              ) : (
-                <Home />
-              ))}/>
-
-          <Route path="/map/"
-            render={() => (
+            <Route exact path="/" render={() => (
                 this.state.filter ? (
                   <Redirect to="/listings/" />
                 ) : (
-                  <h2>Map</h2>
+                  <Home />
                 ))}/>
 
-          <Route path="/listings/"
-            render={() => <WorkList works={this.state.works} toggleFilter={this.toggleFilter}
-                filter={this.state.filter}
-                showDetail={this.showWorkDetail}
-                hideDetail={this.hideWorkDetail}
-                url={this.GET_ALL_WORKS_URL}/>} />
+            <Route path="/map/"
+              render={() => (
+                  this.state.filter ? (
+                    <Redirect to="/listings/" />
+                  ) : (
+                    <h2>Map</h2>
+                  ))}/>
+
+            <Route path="/listings/"
+              render={() => <WorkList works={this.state.works} toggleFilter={this.toggleFilter}
+                  filter={this.state.filter}
+                  url={this.GET_ALL_WORKS_URL}/>} />
+          </div>
+        </Router>
+        <div className={this.state.isShowing? "display-block" : "display-none"}>
+          <section className="modal">
+            <div className="modal-main">
+              <button onClick={this.closeModalHandler} className="label small-button">Exit without saving</button>
+              <New categories={this.state.categories}/>
+            </div>
+          </section>
         </div>
-      </Router>
+      </div>
+
+
     );
   }
 }
