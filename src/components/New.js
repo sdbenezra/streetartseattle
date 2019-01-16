@@ -12,13 +12,13 @@ class New extends React.Component{
       formData: {
         title: '',
         artist: '',
-        category: [],
         address: '',
         about: '',
         media: '',
         measurements: '',
         date: '',
         tags: '',
+        imagecredit: '',
       }
     };
     this.handleChange = this.onInputChange.bind(this);
@@ -48,7 +48,9 @@ class New extends React.Component{
     for (const key in this.state.formData){
       formData.append(key, this.state.formData[key])
     };
-    formData.append('image', image);
+    if (this.state.formData.image){
+      formData.append('image', image);
+    }
     axios({
       method: 'post',
       url: 'http://127.0.0.1:8000/api/work/works/',
@@ -87,7 +89,7 @@ class New extends React.Component{
                 </label>
                 <label className="label">
                   <strong>Category: </strong>
-                  <select name="category" value={`${this.state.formData.category}`} onChange={this.handleChange} multiple={false} >
+                  <select name="category" value={this.state.formData.category} onChange={this.handleChange} multiple={false} >
                     {list}
                   </select>
                 </label>
@@ -124,6 +126,11 @@ class New extends React.Component{
                 <label className="label">
                   <strong>Upload New Image Here: </strong>
                   <input name="image" type="file" accept="image/*" className="value" ref={this.fileInput} />
+                </label>
+                <label className="label">
+                  <strong>Image Credit: </strong>
+                  <input name="imagecredit" placeholder="Image Credit" type="text"
+                         className="value" value={this.state.formData.imagecredit} onChange={this.onInputChange} />
                 </label>
                 <div className="label">
                   <input type="submit" value="Submit" className="label small-button" />

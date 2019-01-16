@@ -65,8 +65,8 @@ class Dashboard extends Component {
 
 
   componentDidMount() {
-    this.refreshList();
     this.retrieveCategories();
+    this.refreshList();  
   }
 
   componentDidUpdate(){

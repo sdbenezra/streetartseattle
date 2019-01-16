@@ -13,13 +13,14 @@ class WorkDetail extends React.Component{
       formData: {
         title: props.workDetail.title,
         artist: props.workDetail.artist,
-        category: [`${props.workDetail.category}`],
+        category: props.workDetail.category,
         address: props.workDetail.address,
         about: props.workDetail.about,
         media: props.workDetail.media,
         measurements: props.workDetail.measurements,
         date: props.workDetail.date,
         tags: props.workDetail.tags,
+        imagecredit: props.workDetail.imagecredit,
       }
     };
     this.handleChange = this.onInputChange.bind(this);
@@ -117,13 +118,14 @@ class WorkDetail extends React.Component{
           )
       });
 
-    const {image, title, artist, category, about, media, measurements, date, address, tags} = this.props.workDetail;
+    const {image, title, artist, category, about, media, measurements, date, address, tags, imagecredit} = this.props.workDetail;
 
     return (
       <div className="modal">
         <div className={this.state.showEdit ? "display-none" : "display-block"}>
           <section className="modal-main detail">
             <this.WorkImage image={image}/>
+            <p>{imagecredit}</p>
             <h2>{title}</h2>
             <p>by {artist}</p>
             <p>{category}</p>
@@ -201,6 +203,11 @@ class WorkDetail extends React.Component{
                   <strong>Tags: </strong>
                   <input name="tags" placeholder="Tags" type="text"
                          className="value" value={this.state.formData.tags} onChange={this.onInputChange} />
+                </label>
+                <label className="label">
+                  <strong>Image Credit: </strong>
+                  <input name="imagecredit" placeholder="Image Credit" type="text"
+                         className="value" value={this.state.formData.imagecredit} onChange={this.onInputChange} />
                 </label>
                 <div className="label">
                   <input type="submit" value="Submit edit" className="label small-button" />
