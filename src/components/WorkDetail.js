@@ -52,11 +52,6 @@ class WorkDetail extends React.Component{
 
   uploadHandler = (event) => {
     event.preventDefault();
-    alert (
-      `Selected file - ${
-        this.fileInput.current.files[0].name
-      }`
-    )
     const URL = this.props.url;
     console.log(URL);
     let image = this.fileInput.current.files[0]
@@ -65,10 +60,11 @@ class WorkDetail extends React.Component{
     axios.post(`${URL}${this.props.workDetail.id}/upload-image/`,
       formData,
     ).then((response) => {
-      console.log('Uploaded file');
+      console.log(response.data);
+      alert('Your image was uploaded!');
     })
     .catch((error) => {
-      console.log('upload failed');
+      alert('Upload failed.');
     })
   }
 
@@ -94,7 +90,7 @@ class WorkDetail extends React.Component{
       formData
     )
     .then((response) => {
-      console.log(`response is ${response.data}`);
+      console.log(`response is ${(JSON.stringify(response.data))}`);
       this.setState({ showEdit: false });
     })
     .catch((error) => {
