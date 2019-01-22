@@ -53,7 +53,7 @@ class New extends React.Component{
     }
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8000/api/work/works/',
+      url: this.props.url,
       data: formData,
       config: { headers: {'Content-Type': 'multipart/form-data'}}
     }).then((response) => {
