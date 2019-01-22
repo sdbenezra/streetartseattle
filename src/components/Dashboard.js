@@ -111,7 +111,7 @@ class Dashboard extends Component {
                 <Link className="link" to="/listings/" onClick={this.refreshList}>Listings</Link>
               </button>
               <button className="link small-button" onClick={this.openModalHandler} categories={this.state.categories}
-                  url={this.GET_ALL_WORKS_URL}
+                  url={this.GET_CATEGORIES_URL}
                    >Add New Work
               </button>
               <SearchForm className="search-form" url={this.GET_ALL_WORKS_URL} filter={this.filterList}/>

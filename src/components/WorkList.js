@@ -5,14 +5,14 @@ import axios from 'axios';
 
 
 class WorkList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       categories: []
     }
 
-  axios.get('http://127.0.0.1:8000/api/work/categories/')
+  axios.get(this.props.url)
     .then((response) => {
       let list = []
       console.log(`response ${response.data[0].id} ${response.data.length}`);
