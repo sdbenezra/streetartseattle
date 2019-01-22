@@ -1,7 +1,6 @@
 .nav-list_container {
   background-color: #F7710A;
-  text-align: center;
-  padding-left: 3rem;
+  align-content: center;
   width: 100vw;
 }
 
