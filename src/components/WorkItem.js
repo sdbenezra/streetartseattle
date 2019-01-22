@@ -37,7 +37,7 @@ class WorkItem extends React.Component {
           <div className='item__details'>
             <this.WorkImage image={this.props.image}/>
           </div>
-          <div className='item__details'>
+          <div>
             <h2>{this.props.title}</h2>
             <p>by {this.props.artist}</p>
             <p>{this.props.category}</p>

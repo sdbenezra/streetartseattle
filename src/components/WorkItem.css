@@ -1,7 +1,5 @@
 .item {
-  display: grid;
-  grid-template-columns: 2fr 5fr;
-  padding: 0 1.5em;
+  width: 100vw;
 }
 
 .item__details {
