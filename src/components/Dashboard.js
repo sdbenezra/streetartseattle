@@ -66,7 +66,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.retrieveCategories();
-    this.refreshList();  
+    this.refreshList();
   }
 
   componentDidUpdate(){
@@ -108,9 +108,6 @@ class Dashboard extends Component {
                 <Link className="link" to="/" >Home</Link>
               </button>
               <button className="button">
-                <Link className="link" to="/map/" >Map</Link>
-              </button>
-              <button className="button">
                 <Link className="link" to="/listings/" onClick={this.refreshList}>Listings</Link>
               </button>
               <button className="link small-button" onClick={this.openModalHandler} categories={this.state.categories}
@@ -130,14 +127,6 @@ class Dashboard extends Component {
                 ) : (
                   <Home />
                 ))}/>
-
-            <Route path="/map/"
-              render={() => (
-                  this.state.filter ? (
-                    <Redirect to="/listings/" />
-                  ) : (
-                    <h2>Map</h2>
-                  ))}/>
 
             <Route path="/listings/"
               render={() => <WorkList works={this.state.works} toggleFilter={this.toggleFilter}
