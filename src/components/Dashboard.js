@@ -24,8 +24,8 @@ class Dashboard extends Component {
     this.filterList = this.filterList.bind(this);
   }
 
-  GET_ALL_WORKS_URL = "http://sas-dep.y9fjgpjffq.us-west-1.elasticbeanstalk.com/api/work/works/";
-  GET_CATEGORIES_URL = "http://sas-dep.y9fjgpjffq.us-west-1.elasticbeanstalk.com/api/work/categories/"
+  GET_ALL_WORKS_URL = "https://d1zypott5n0u22.cloudfront.net/api/work/works/";
+  GET_CATEGORIES_URL = "https://d1zypott5n0u22.cloudfront.net/api/work/categories/"
 
   refreshList = () => {
     axios.get(this.GET_ALL_WORKS_URL)
